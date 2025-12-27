@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mở Hộp Quà Năm Mới 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Hiệu ứng ngôi sao lấp lánh */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header h1 {
+            color: #ffd700;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        /* Phần hiển thị lá thăm ban đầu */
+        .fortune-cards-intro {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0 40px 0;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .fortune-cards-intro.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .fortune-card-intro {
+            width: 70px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            border: 2px solid #ffd700;
+            padding: 8px;
+            text-align: center;
+            animation: cardIntro 1s ease forwards;
+            opacity: 0;
+        }
+
+        .fortune-card-intro:nth-child(1) { animation-delay: 0s; }
+        .fortune-card-intro:nth-child(2) { animation-delay: 0.2s; }
+        .fortune-card-intro:nth-child(3) { animation-delay: 0.4s; }
+
+        .fortune-card-intro.hiding {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        @keyframes cardIntro {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Container cho các hộp quà */
+        .gifts-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0;
+            perspective: 1000px;
+        }
+
+        /* Hộp quà 3D */
+        .gift-wrapper {
+            width: 90px;
+            height: 100px;
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .gift-wrapper.shuffling {
+            animation: none;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .gift-wrapper.shuffle-left {
+            transform: translateX(-110px) scale(0.95) rotateZ(-5deg);
+        }
+
+        .gift-wrapper.shuffle-right {
+            transform: translateX(110px) scale(0.95) rotateZ(5deg);
+        }
+
+        .gift-wrapper.shuffle-center {
+            transform: translateX(0) scale(1.05) rotateZ(0deg);
+            z-index: 10;
+        }
+
+        .gift-wrapper.selected {
+            transform: scale(2.5) translateY(-50px);
+            z-index: 100;
+        }
+
+        .gift-box-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-wrapper:not(.selected) .gift-box-3d:hover {
+            transform: translateY(-5px);
+        }
+
+        .gift-wrapper.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* Thân hộp */
+        .box-body {
+            width: 100%;
+            height: 70%;
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .box-body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15%;
+            height: 90%;
+            background: #ffd700;
+            z-index: 3;
+        }
+
+        .box-body::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 15%;
+            background: #ffd700;
+            z-index: 3;
+        }
+
+        /* Nắp hộp */
+        .box-lid {
+            width: 100%;
+            height: 35%;
+            position: absolute;
+            top: 0;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border: 2px solid #ffd700;
+            border-radius: 5px 5px 0 0;
+            transform-origin: bottom;
+            transition: transform 0.8s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .box-lid::before {
+            content: '🎀';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+        }
+
+        .gift-wrapper.opening .box-lid {
+            transform: rotateX(-120deg);
+        }
+
+        /* Lá thăm bên trong hộp - ẩn hoàn toàn khi chưa mở */
+        .fortune-card-inside {
+            position: absolute;
+            width: 60%;
+            height: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 5px;
+            text-align: center;
+            opacity: 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Lá thăm bay ra khi mở hộp */
+        .fortune-card-reveal {
+            position: fixed;
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 12px;
+            border: 3px solid #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.6);
+            z-index: 150;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .fortune-card-reveal.active {
+            animation: cardReveal 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes cardReveal {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -80%) scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -120%) scale(1);
+            }
+        }
+
+        /* Animation cho việc bỏ lá thăm vào hộp */
+        .fortune-card-flying {
+            position: fixed;
+            width: 70px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 8px;
+            border: 2px solid #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px;
+            text-align: center;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .instruction {
+            text-align: center;
+            color: #ffd700;
+            font-size: 14px;
+            margin: 20px 0;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Pháo hoa */
+        .firework {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            to {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal hiển thị kết quả */
+        .result-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-overlay.active {
+            display: flex;
+        }
+
+        .result-content {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 85%;
+            text-align: center;
+            border: 3px solid #ffd700;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-content h2 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .result-content .fortune-text {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+        .reset-btn {
+            background: #ffd700;
+            color: #330066;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Hiệu ứng ánh sáng khi mở hộp */
+        .light-burst {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0) 70%);
+            pointer-events: none;
+            z-index: 140;
+            opacity: 0;
+        }
+
+        .light-burst.active {
+            animation: lightBurst 1s ease-out;
+        }
+
+        @keyframes lightBurst {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ngôi sao lấp lánh -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>CHÚC MỪNG NĂM MỚI 2026</h1>
+            <p>Ba lá thăm may mắn đang chờ em!</p>
+        </div>
+
+        <!-- Hiển thị 3 lá thăm ban đầu -->
+        <div class="fortune-cards-intro" id="fortuneCardsIntro">
+            <div class="fortune-card-intro">Trúng thưởng</div>
+            <div class="fortune-card-intro">Không trúng</div>
+            <div class="fortune-card-intro">Không trúng</div>
+        </div>
+
+        <p class="instruction" id="instruction">Đang chuẩn bị hộp quà...</p>
+
+        <!-- Container cho các hộp quà -->
+        <div class="gifts-container" id="giftsContainer">
+            <div class="gift-wrapper" data-box="0">
+                <div class="gift-box-3d">
+                    <div class="box-lid"></div>
+                    <div class="box-body"></div>
+                    <div class="fortune-card-inside"></div>
+                </div>
+            </div>
+            
+            <div class="gift-wrapper" data-box="1">
+                <div class="gift-box-3d">
+                    <div class="box-lid"></div>
+                    <div class="box-body"></div>
+                    <div class="fortune-card-inside"></div>
+                </div>
+            </div>
+            
+            <div class="gift-wrapper" data-box="2">
+                <div class="gift-box-3d">
+                    <div class="box-lid"></div>
+                    <div class="box-body"></div>
+                    <div class="fortune-card-inside"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay hiển thị kết quả -->
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-content">
+            <h2>Lá thăm may mắn</h2>
+            <div class="fortune-text" id="fortuneText"></div>
+            <button class="reset-btn" onclick="resetGame()">Chơi Lại</button>
+        </div>
+    </div>
+
+    <script>
+      
+        const WINNING_FORTUNE = 0; // Thay đổi số này để chọn lá thăm khác
+
+        const fortunes = [
+            {
+                title: "Trúng thưởng",
+                message: "Em sẽ nhận được 1 món quà\n\nTrong vòng vài ngày tới\n"
+            },
+            {
+                title: "",
+                message: "💪 SỨC KHỎE DỒI DÀO 💪\n\nCơ thể khỏe mạnh, tràn đầy năng lượng.\nGia đình luôn bình an, hạnh phúc!"
+            },
+            {
+                title: "Hạnh Phúc",
+                message: "❤️ HẠNH PHÚC VÔ BIÊN ❤️\n\nTình yêu viên mãn, gia đình sum vầy.\nNiềm vui tràn ngập mọi ngày!"
+            }
+        ];
+
+        let gameStarted = false;
+        let boxClicked = false;
+        let winningBoxIndex = -1;
+
+        // Tạo ngôi sao
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Tạo pháo hoa
+        function createFirework(x, y) {
+            const colors = ['#ff0000', '#ffd700', '#00ff00', '#0099ff', '#ff00ff', '#ffff00'];
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            document.body.appendChild(firework);
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 50 + Math.random() * 50;
+                particle.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
+                particle.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
+                
+                firework.appendChild(particle);
+            }
+
+            setTimeout(() => firework.remove(), 1000);
+        }
+
+        // Animation bỏ lá thăm vào hộp
+        function animateCardToBox(cardIndex, boxElement) {
+            const fortuneCard = document.querySelectorAll('.fortune-card-intro')[cardIndex];
+            const cardRect = fortuneCard.getBoundingClientRect();
+            const boxRect = boxElement.getBoundingClientRect();
+            
+            // Ẩn lá thăm gốc ngay khi bắt đầu bay
+            fortuneCard.classList.add('hiding');
+            
+            const flyingCard = document.createElement('div');
+            flyingCard.className = 'fortune-card-flying';
+            flyingCard.textContent = fortunes[cardIndex].title;
+            flyingCard.style.left = cardRect.left + 'px';
+            flyingCard.style.top = cardRect.top + 'px';
+            document.body.appendChild(flyingCard);
+
+            // Animation bay về hộp - biến mất khi vào hộp
+            setTimeout(() => {
+                flyingCard.style.transition = 'all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.2s ease-in 0.6s';
+                flyingCard.style.left = (boxRect.left + boxRect.width / 2 - 35) + 'px';
+                flyingCard.style.top = (boxRect.top + boxRect.height / 2 - 50) + 'px';
+                flyingCard.style.transform = 'scale(0.2)';
+                flyingCard.style.opacity = '0';
+            }, 50);
+
+            setTimeout(() => {
+                flyingCard.remove();
+                // Lưu thông tin lá thăm vào trong hộp (không hiển thị)
+                const insideCard = boxElement.querySelector('.fortune-card-inside');
+                insideCard.textContent = fortunes[cardIndex].title;
+            }, 900);
+        }
+
+        // Mở nắp hộp, bỏ lá thăm vào, và đóng nắp
+        async function fillBoxes() {
+            const boxes = document.querySelectorAll('.gift-wrapper');
+            
+            // Mở nắp tất cả các hộp
+            boxes.forEach(box => {
+                box.classList.add('opening');
+            });
+
+            await sleep(1000);
+
+            // Bỏ lá thăm vào từng hộp
+            for (let i = 0; i < 3; i++) {
+                animateCardToBox(i, boxes[i]);
+                await sleep(400);
+            }
+
+            await sleep(1000);
+
+            // Ẩn lá thăm giới thiệu
+            document.getElementById('fortuneCardsIntro').classList.add('hidden');
+
+            await sleep(500);
+
+            // Đóng nắp tất cả các hộp
+            boxes.forEach(box => {
+                box.classList.remove('opening');
+            });
+
+            await sleep(1000);
+
+            // Xáo trộn vị trí các hộp
+            await shuffleBoxes();
+            
+            gameStarted = true;
+            document.getElementById('instruction').textContent = 'Chọn một hộp quà đi em !';
+        }
+
+        // Xáo trộn các hộp
+        async function shuffleBoxes() {
+            const container = document.getElementById('giftsContainer');
+            const boxes = Array.from(document.querySelectorAll('.gift-wrapper'));
+            
+            document.getElementById('instruction').textContent = 'Đang xáo trộn...';
+
+            // Xáo trộn 5 lần với các pattern khác nhau
+            const shufflePatterns = [
+                [2, 0, 1], // Box 3 -> Box 1, Box 1 -> Box 2, Box 2 -> Box 3
+                [1, 2, 0], // Box 2 -> Box 1, Box 3 -> Box 2, Box 1 -> Box 3
+                [0, 2, 1], // Đổi Box 2 và Box 3
+                [2, 1, 0], // Đảo ngược hoàn toàn
+                [1, 0, 2]  // Box 2 -> Box 1, Box 1 -> Box 2
+            ];
+
+            for (let round = 0; round < shufflePatterns.length; round++) {
+                const pattern = shufflePatterns[round];
+                
+                // Thêm class shuffling cho animation
+                boxes.forEach(box => box.classList.add('shuffling'));
+
+                // Xác định vị trí cho mỗi hộp
+                boxes.forEach((box, index) => {
+                    box.classList.remove('shuffle-left', 'shuffle-center', 'shuffle-right');
+                    const targetPos = pattern.indexOf(index);
+                    
+                    if (targetPos === 0) {
+                        box.classList.add('shuffle-left');
+                    } else if (targetPos === 1) {
+                        box.classList.add('shuffle-center');
+                    } else {
+                        box.classList.add('shuffle-right');
+                    }
+                });
+
+                await sleep(500);
+
+                // Sắp xếp lại DOM theo pattern
+                const newOrder = pattern.map(i => boxes[i]);
+                newOrder.forEach(box => container.appendChild(box));
+
+                // Reset về vị trí ban đầu
+                boxes.forEach(box => {
+                    box.classList.remove('shuffle-left', 'shuffle-center', 'shuffle-right');
+                });
+
+                await sleep(200);
+                
+                boxes.forEach(box => box.classList.remove('shuffling'));
+                await sleep(300);
+            }
+
+            // Xác định hộp nào có lá thăm được chỉ định
+            const finalBoxes = Array.from(document.querySelectorAll('.gift-wrapper'));
+            finalBoxes.forEach((box, index) => {
+                const insideCard = box.querySelector('.fortune-card-inside');
+                if (insideCard.textContent === fortunes[WINNING_FORTUNE].title) {
+                    winningBoxIndex = index;
+                }
+            });
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Hiệu ứng ánh sáng khi mở hộp
+        function createLightBurst(x, y) {
+            const lightBurst = document.createElement('div');
+            lightBurst.className = 'light-burst';
+            lightBurst.style.left = x + 'px';
+            lightBurst.style.top = y + 'px';
+            document.body.appendChild(lightBurst);
+            
+            setTimeout(() => lightBurst.classList.add('active'), 10);
+            setTimeout(() => lightBurst.remove(), 1000);
+        }
+
+        // Hiệu ứng lá thăm bay ra
+        function revealFortuneCard(boxElement, fortuneTitle) {
+            const boxRect = boxElement.getBoundingClientRect();
+            const centerX = boxRect.left + boxRect.width / 2;
+            const centerY = boxRect.top + boxRect.height / 2;
+
+            const revealCard = document.createElement('div');
+            revealCard.className = 'fortune-card-reveal';
+            revealCard.textContent = fortuneTitle;
+            revealCard.style.left = centerX + 'px';
+            revealCard.style.top = centerY + 'px';
+            document.body.appendChild(revealCard);
+
+            setTimeout(() => revealCard.classList.add('active'), 10);
+
+            return revealCard;
+        }
+
+        // Xử lý click vào hộp
+        document.querySelectorAll('.gift-wrapper').forEach((box, index) => {
+            box.addEventListener('click', async function() {
+                if (!gameStarted || boxClicked) return;
+                
+                boxClicked = true;
+                
+                // Disable tất cả các hộp khác
+                document.querySelectorAll('.gift-wrapper').forEach((b, i) => {
+                    if (i !== index) {
+                        b.classList.add('disabled');
+                    }
+                });
+
+                // Phóng to hộp được chọn
+                this.classList.add('selected');
+                await sleep(800);
+
+                // Tạo ánh sáng
+                const boxRect = this.getBoundingClientRect();
+                createLightBurst(boxRect.left + boxRect.width / 2, boxRect.top + boxRect.height / 2);
+
+                // Mở hộp
+                this.classList.add('opening');
+                await sleep(600);
+
+                // Lấy thông tin lá thăm
+                const insideCard = this.querySelector('.fortune-card-inside');
+                const fortuneTitle = insideCard.textContent;
+                const fortune = fortunes.find(f => f.title === fortuneTitle);
+
+                // Hiệu ứng lá thăm bay ra
+                const revealCard = revealFortuneCard(this, fortuneTitle);
+
+                // Tạo pháo hoa
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        createFirework(
+                            Math.random() * window.innerWidth,
+                            Math.random() * window.innerHeight / 2
+                        );
+                    }, i * 150);
+                }
+
+                await sleep(2000);
+
+                // Xóa lá thăm bay ra
+                revealCard.remove();
+
+                // Hiển thị kết quả
+                document.getElementById('fortuneText').textContent = fortune.message;
+                document.getElementById('resultOverlay').classList.add('active');
+            });
+        });
+
+        function resetGame() {
+            location.reload();
+        }
+
+        // Khởi tạo
+        createStars();
+        
+        // Bắt đầu game sau 2 giây
+        setTimeout(() => {
+            fillBoxes();
+        }, 2000);
+
+        // Pháo hoa ngẫu nhiên
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                createFirework(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight / 2
+                );
+            }
+        }, 2000);
+    </script>
+</body>
+</html>
